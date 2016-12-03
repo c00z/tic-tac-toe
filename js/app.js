@@ -1,32 +1,34 @@
-//storing user selections, data
+//storing user selections in objects
 var data = {
-  user1: [],
-  user2: [],
+  user1: {
+    selections: [],
+    icon: 'http://www.freeiconspng.com/uploads/close-icon-29.png',
+    name: 'Shreddie Mercury'
+  },
+  user2: {
+    selections: [],
+    icon: 'http://www.iconsdb.com/icons/preview/gray/circle-outline-xxl.png',
+    name: 'Bro Dozer'
+  },
   currentPlayer: 'user1'
 };
-
-//sets icons
-var xIcon = 'http://www.freeiconspng.com/uploads/close-icon-29.png';
-var oIcon = 'http://www.iconsdb.com/icons/preview/gray/circle-outline-xxl.png';
-
 
 $(document).ready(function() {
 
   $('#board').on('click', function(event) {
-    userClick(event, data.user1);
+    userClick(event, data[data.currentPlayer]);
   })
 
-  //initiation: calling current user status
   setCurrentUserStatus();
 
-
-
+  // $('.box').on('click', boxClick)
 
 });
 
-//
+
 function setCurrentUserStatus() {
-  $('#current-user').text(data.currentPlayer);
+  var currentPlayer = data[data.currentPlayer];
+  $('#current-user').text(currentPlayer.name);
 }
 
 //Checking for win
@@ -56,28 +58,31 @@ var winCombos = [
     if (count > 2) {
       ret = true;
     }
-  });
+  }); 
 
   return ret;
 }
 
 console.log(checkWin([1,2,4]));
 
-
 function userClick(event, user) {
-  var currentPlayer = data.currentPlayer;
+  var currentPlayer = data[data.currentPlayer];
   var $element = $(event.target);
-
   var boxIndex = $('.box').index($element);
-  $element.html('<img src="' + xIcon + '"/>');
-  user.push(boxIndex);
 
-  console.log('the box index is:', user );
-  console.log('have I won?', checkWin(user));
-  console.log('who is the current player?', currentPlayer);
+  $element.html('<img src="' + user.icon + '"/>');
+  user.selections.push(boxIndex);
 
   // switch to other user
-  data.currentPlayer = (currentPlayer === 'user1') ? 'user2' : 'user1';
+  data.currentPlayer = (data.currentPlayer === 'user1') ? 'user2' : 'user1';
+
+
+  // if the user has won
+  checkWin(user.selections)
+  // then stop the program
+  // set a UI element to show who won
+  // if it is a draw, show that the game is a draw
+
   setCurrentUserStatus();
 }
 
