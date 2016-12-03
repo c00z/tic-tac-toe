@@ -1,16 +1,26 @@
-#board {
-  margin-top: 10px;
+/**{
+  border: dashed 1px black;
+}*/
+
+body {
+  background-image: url(http://i.imgur.com/e4KKshy.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100% 110%;
+}
+
+
+h1 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 70px;
 }
 
 .box {
-  border: 1px solid black;
+  border: 3px solid black;
   height: 150px;
 }
 
-.col-md-4 box:hover {
-  color: red;
-}
-
-#btn1:hover {
-  color: red;
+#board {
+  margin-top: 10px;
 }
