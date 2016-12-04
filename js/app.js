@@ -1,4 +1,4 @@
-//storing user selections in objects
+//storing user selections, data
 var data = {
   user1: {
     selections: [],
@@ -13,15 +13,19 @@ var data = {
   currentPlayer: 'user1'
 };
 
+
 $(document).ready(function() {
+
+  //Reload button call
+$("#row4").click(function() {
+    location.reload(data);
+});
 
   $('#board').on('click', function(event) {
     userClick(event, data[data.currentPlayer]);
   })
 
   setCurrentUserStatus();
-
-  // $('.box').on('click', boxClick)
 
 });
 
@@ -58,7 +62,7 @@ var winCombos = [
     if (count > 2) {
       ret = true;
     }
-  }); 
+  });
 
   return ret;
 }
