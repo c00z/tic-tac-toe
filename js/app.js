@@ -36,10 +36,10 @@ function setCurrentUserStatus() {
   $('#current-user').text(currentPlayer.name);
 }
 
-//Checking for win
+//Checking for win function through array
 function checkWin(selections) {
   var ret = false;
-    //Wining combo array
+//Wining combo array
 var winCombos = [
   [0,1,2],
   [0,4,8],
@@ -50,6 +50,7 @@ var winCombos = [
   [2,5,8]
 ];
 
+
   winCombos.forEach(function(combo){
     var count = 0;
     // check if 3 selections in combo
@@ -59,7 +60,7 @@ var winCombos = [
         count++;
       }
     });
-
+//if greater than two, considered win
     if (count > 2) {
       ret = true;
     }
@@ -68,14 +69,13 @@ var winCombos = [
   return ret;
 }
 
-console.log(checkWin([1,2,4]));
 
 function hasBeenSelected(boxIndex) {
   var allSelections = data.user1.selections.concat(data.user2.selections);
   return allSelections.includes(boxIndex);
 }
 
-//Check if draw scenario
+//Check if draw scenario if 9 boxes checked an no winner
 function checkDraw() {
   var allSelections = data.user1.selections.concat(data.user2.selections);
   return allSelections.length === 9;
@@ -92,14 +92,18 @@ function userClick(event, user) {
   var $element = $(event.target);
   $element = $element.is('img') ? $element.parent() : $element;
 
+ //set value to individual boxes
   var boxIndex = $('.box').index($element);
 
   console.log(hasBeenSelected(boxIndex))
+
+  // if already selected
   if (hasBeenSelected(boxIndex)) {
-    // prompt that the image was selected
+
     return false;
   }
 
+//push user image to box
   $element.html('<img src="' + user.icon + '"/>');
   user.selections.push(boxIndex);
 
@@ -118,9 +122,4 @@ function userClick(event, user) {
     return false;
   }
   setCurrentUserStatus();
-}
-
-function boxClick() {
-  console.log("test")
-
 }
