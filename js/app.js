@@ -1,22 +1,23 @@
-//storing user selections, data
+//storing users, img and selections in objects
 var data = {
   user1: {
     selections: [],
     icon: 'http://www.freeiconspng.com/uploads/close-icon-29.png',
-    name: 'Shreddie Mercury'
+    name: 'Player 1'
   },
   user2: {
     selections: [],
     icon: 'http://www.iconsdb.com/icons/preview/gray/circle-outline-xxl.png',
-    name: 'Bro Dozer'
+    name: 'Player 2'
   },
-  currentPlayer: 'user1'
+  currentPlayer: 'user1',
+  hasWon: false
 };
 
 
 $(document).ready(function() {
 
-  //Reload button call
+//Reload page button call
 $("#row4").click(function() {
     location.reload(data);
 });
@@ -29,7 +30,7 @@ $("#row4").click(function() {
 
 });
 
-
+//Assign User name on site
 function setCurrentUserStatus() {
   var currentPlayer = data[data.currentPlayer];
   $('#current-user').text(currentPlayer.name);
@@ -69,24 +70,53 @@ var winCombos = [
 
 console.log(checkWin([1,2,4]));
 
+function hasBeenSelected(boxIndex) {
+  var allSelections = data.user1.selections.concat(data.user2.selections);
+  return allSelections.includes(boxIndex);
+}
+
+//Check if draw scenario
+function checkDraw() {
+  var allSelections = data.user1.selections.concat(data.user2.selections);
+  return allSelections.length === 9;
+}
+
+//checks for win
 function userClick(event, user) {
   var currentPlayer = data[data.currentPlayer];
+  if (data.hasWon) {
+    return false;
+  }
+
+  //Checks for space taken, if so no action
   var $element = $(event.target);
+  $element = $element.is('img') ? $element.parent() : $element;
+
   var boxIndex = $('.box').index($element);
+
+  console.log(hasBeenSelected(boxIndex))
+  if (hasBeenSelected(boxIndex)) {
+    // prompt that the image was selected
+    return false;
+  }
 
   $element.html('<img src="' + user.icon + '"/>');
   user.selections.push(boxIndex);
 
-  // switch to other user
+// switch to other user
   data.currentPlayer = (data.currentPlayer === 'user1') ? 'user2' : 'user1';
 
 
   // if the user has won
-  checkWin(user.selections)
-  // then stop the program
-  // set a UI element to show who won
-  // if it is a draw, show that the game is a draw
+  data.hasWon = checkWin(user.selections)
 
+  if (data.hasWon) {
+    $('#header').html(`${currentPlayer.name} has won`)
+    return false;
+  } else if (checkDraw()) {
+    $('#header').html('Dis Game is uh draw, bruddah');
+    return false;
+  }
   setCurrentUserStatus();
 }
 

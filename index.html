@@ -24,54 +24,52 @@
 
     <title>Tic Tac Toe</title>
   </head>
-
-  <body>
-    <div class="container">
-  <div class="row text-center">
-    <div class="col-md-12">
-      <h1>Tic Tac Toe</h1>
-      <hr>
+<body>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1>Tic Tac Toe</h1>
+        <hr>
+      </div>
     </div>
-  </div>
-  <div class="row">
+    <div class="row">
 
-    <!-- Master Column and Centering Board -->
-    <div class="col-md-6 col-md-offset-3" id="board">
-      <div class="row">
-        <div class="col-md-12">
-          Current User: <span id="current-user"></span>
+      <!-- Master Column and Centering Board -->
+      <div class="col-md-6 col-md-offset-3" id="board">
+        <div class="row">
+          <div class="col-md-12" id="header">
+            Current Player: <span id="current-user"></span>
+          </div>
         </div>
+
+        <!--Row 1-->
+        <div class="row">
+          <div class="col-md-4 box" id="p1"></div>
+          <div class="col-md-4 box" id="p2"></div>
+          <div class="col-md-4 box" id="p3"></div>
+        </div>
+
+        <!--Row 2-->
+        <div class="row">
+          <div class="col-md-4 box" id="p4"></div>
+          <div class="col-md-4 box" id="p5"></div>
+          <div class="col-md-4 box" id="p6"></div>
+        </div>
+
+        <!--Row 3-->
+        <div class="row">
+          <div class="col-md-4 box" id="p7"></div>
+          <div class="col-md-4 box" id="p8"></div>
+          <div class="col-md-4 box" id="p9"></div>
+        </div>
+
+
       </div>
-
-      <!--Row 1-->
-      <div class="row">
-        <div class="col-md-4 box" id="p1"></div>
-        <div class="col-md-4 box" id="p2"></div>
-        <div class="col-md-4 box" id="p3"></div>
-      </div>
-
-      <!--Row 2-->
-      <div class="row">
-        <div class="col-md-4 box" id="p4"></div>
-        <div class="col-md-4 box" id="p5"></div>
-        <div class="col-md-4 box" id="p6"></div>
-      </div>
-
-      <!--Row 3-->
-      <div class="row">
-        <div class="col-md-4 box" id="p7"></div>
-        <div class="col-md-4 box" id="p8"></div>
-        <div class="col-md-4 box" id="p9"></div>
-      </div>
-
-
-    </div>
 
 <!-- Button -->
-  </div>
-    <div class="row" id="row4">
-      <button type="button" class="btn btn-primary btn-lg btn-block" id="resart">Reset</button>
-   </div>
-
-  </body>
+    </div>
+      <div class="row" id="row4">
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="resart">Play Again?</button>
+     </div>
+</body>
 </html>
